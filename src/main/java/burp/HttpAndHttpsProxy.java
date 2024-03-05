@@ -1,6 +1,6 @@
 package burp;
 
-import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
+import java.util.Base64;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
@@ -78,7 +78,8 @@ public class HttpAndHttpsProxy {
             if(username != null && username != "" && password != null && password != "" ) {
                 String user_pass = String.format("%s:%s", username, password);
                 String headerKey = "Proxy-Authorization";
-                String headerValue = "Basic " + Base64.encode(user_pass.getBytes());
+
+                String headerValue = "Basic " + Base64.getEncoder().encodeToString(user_pass.getBytes());
                 httpsConn.setRequestProperty(headerKey, headerValue);
             }
 
@@ -206,7 +207,7 @@ public class HttpAndHttpsProxy {
             if(username != null && username != "" && password != null && password != "" ) {
                 String user_pass = String.format("%s:%s", username, password);
                 String headerKey = "Proxy-Authorization";
-                String headerValue = "Basic " + Base64.encode(user_pass.getBytes());
+                String headerValue = "Basic " + Base64.getEncoder().encodeToString(user_pass.getBytes());
                 httpsConn.setRequestProperty(headerKey, headerValue);
             }
 
